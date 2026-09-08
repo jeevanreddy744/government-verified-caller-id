@@ -496,9 +496,11 @@ def test_history():
 # START SERVER
 # =========================================================
 
-if __name__ == "__main__":
+# Initialize the database when the app is imported.
+# This is required for Gunicorn/Render deployment.
+init_database()
 
-    init_database()
+if __name__ == "__main__":
 
     print("")
     print("========================================")
