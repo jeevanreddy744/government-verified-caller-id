@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Official Numbers</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            background: #eef2ff;
+            padding: 30px 15px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 850px;
+            margin: auto;
+            background: white;
+            padding: 35px;
+            border-radius: 25px;
+            box-shadow: 0 20px 60px rgba(15, 23, 42, 0.12);
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            margin-bottom: 28px;
+        }
+
+        h1 {
+            color: #0f172a;
+            font-size: 27px;
+        }
+
+        .subtitle {
+            margin-top: 6px;
+            color: #64748b;
+            font-size: 13px;
+        }
+
+        .back {
+            text-decoration: none;
+            background: #0f172a;
+            color: white;
+            padding: 11px 15px;
+            border-radius: 10px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .card {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 17px;
+            padding: 22px;
+            margin-bottom: 25px;
+        }
+
+        .card-title {
+            font-size: 15px;
+            font-weight: 800;
+            color: #334155;
+            margin-bottom: 17px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 13px;
+        }
+
+        label {
+            display: block;
+            color: #475569;
+            font-size: 11px;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            padding: 12px;
+            font-size: 13px;
+            outline: none;
+            background: white;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 70px;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            border-color: #7c3aed;
+        }
+
+        .full {
+            grid-column: 1 / -1;
+        }
+
+        .save {
+            width: 100%;
+            margin-top: 15px;
+            padding: 13px;
+            border: none;
+            border-radius: 10px;
+            background: #7c3aed;
+            color: white;
+            font-weight: 800;
+            cursor: pointer;
+        }
+
+        .number {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            padding: 14px;
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 13px;
+            margin-bottom: 10px;
+        }
+
+        .icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: #ede9fe;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 19px;
+        }
+
+        .info {
+            flex: 1;
+        }
+
+        .name {
+            color: #0f172a;
+            font-weight: 800;
+            font-size: 14px;
+        }
+
+        .details {
+            color: #64748b;
+            font-size: 11px;
+            margin-top: 4px;
+            line-height: 1.5;
+        }
+
+        .delete {
+            border: none;
+            background: #fee2e2;
+            color: #b91c1c;
+            padding: 8px 10px;
+            border-radius: 8px;
+            font-size: 10px;
+            font-weight: 800;
+            cursor: pointer;
+        }
+
+        .empty {
+            color: #64748b;
+            font-size: 13px;
+            text-align: center;
+            padding: 15px;
+        }
+
+        @media (max-width: 650px) {
+            .container {
+                padding: 25px 18px;
+            }
+
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .full {
+                grid-column: auto;
+            }
+
+            .number {
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+        <div>
+            <h1>🛡️ Manage Official Numbers</h1>
+            <div class="subtitle">
+                Add and manage verified government department numbers.
+            </div>
+        </div>
+
+        <a class="back" href="/">← HOME</a>
+    </div>
+
+
+    <div class="card">
+
+        <div class="card-title">
+            Add Government / Official Number
+        </div>
+
+        <form action="/add-number" method="POST">
+
+            <div class="grid">
+
+                <div>
+                    <label>PHONE NUMBER *</label>
+                    <input
+                        type="text"
+                        name="phone_number"
+                        maxlength="10"
+                        placeholder="10-digit number"
+                        required>
+                </div>
+
+                <div>
+                    <label>CALLER / DEPARTMENT NAME *</label>
+                    <input
+                        type="text"
+                        name="caller_name"
+                        placeholder="e.g. Cyber Crime Police"
+                        required>
+                </div>
+
+                <div>
+                    <label>DEPARTMENT</label>
+                    <input
+                        type="text"
+                        name="department"
+                        placeholder="e.g. Police">
+                </div>
+
+                <div>
+                    <label>LOCATION</label>
+                    <input
+                        type="text"
+                        name="location"
+                        placeholder="e.g. Telangana">
+                </div>
+
+                <div>
+                    <label>VERIFICATION STATUS</label>
+                    <select name="verification_status">
+                        <option>Official Number Verified</option>
+                        <option>Verification Pending</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label>VERIFICATION SOURCE</label>
+                    <input
+                        type="text"
+                        name="source"
+                        placeholder="Official website / department source">
+                </div>
+
+                <div>
+                    <label>VERIFIED DATE</label>
+                    <input
+                        type="date"
+                        name="verified_date">
+                </div>
+
+                <div>
+                    <label>NOTES</label>
+                    <input
+                        type="text"
+                        name="notes"
+                        placeholder="Optional note">
+                </div>
+
+            </div>
+
+            <button class="save" type="submit">
+                + SAVE OFFICIAL NUMBER
+            </button>
+
+        </form>
+
+    </div>
+
+
+    <div class="card">
+
+        <div class="card-title">
+            Verified Government Numbers
+        </div>
+
+        {% if callers %}
+
+            {% for caller in callers %}
+
+            <div class="number">
+
+                <div class="icon">🛡️</div>
+
+                <div class="info">
+
+                    <div class="name">
+                        {{ caller["caller_name"] }}
+                    </div>
+
+                    <div class="details">
+                        +91 {{ caller["phone_number"] }}
+                        {% if caller["department"] %}
+                            • {{ caller["department"] }}
+                        {% endif %}
+                        {% if caller["location"] %}
+                            • {{ caller["location"] }}
+                        {% endif %}
+                        <br>
+                        ✓ {{ caller["verification_status"] }}
+                    </div>
+
+                </div>
+
+                <form
+                    action="/delete-number/{{ caller['id'] }}"
+                    method="POST"
+                    onsubmit="return confirm('Delete this number?');">
+
+                    <button class="delete" type="submit">
+                        DELETE
+                    </button>
+
+                </form>
+
+            </div>
+
+            {% endfor %}
+
+        {% else %}
+
+            <div class="empty">
+                No official numbers added yet.
+            </div>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+</body>
+</html>

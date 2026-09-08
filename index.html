@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Government Verified Caller ID</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f5f7fb;
+            color: #1f2937;
+        }
+
+        .topbar {
+            background: #111827;
+            color: white;
+            padding: 18px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .topbar h1 {
+            font-size: 21px;
+        }
+
+        .topbar span {
+            font-size: 13px;
+            opacity: 0.75;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .hero {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.06);
+        }
+
+        .hero h2 {
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+
+        .hero p {
+            color: #6b7280;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 12px;
+            margin-top: 22px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            text-decoration: none;
+            padding: 12px 18px;
+            border-radius: 9px;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .primary {
+            background: #7c3aed;
+            color: white;
+        }
+
+        .primary:hover {
+            background: #6d28d9;
+        }
+
+        .secondary {
+            background: #eef2ff;
+            color: #4f46e5;
+        }
+
+        .secondary:hover {
+            background: #e0e7ff;
+        }
+
+        .section {
+            background: white;
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.06);
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .section-header h3 {
+            font-size: 19px;
+        }
+
+        .section-header span {
+            color: #6b7280;
+            font-size: 12px;
+        }
+
+        /* QUICK DEMO */
+
+        .demo-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .demo-card {
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 18px;
+            transition: 0.15s;
+        }
+
+        .demo-card:hover {
+            border-color: #c4b5fd;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.04);
+        }
+
+        .demo-card h4 {
+            font-size: 15px;
+            margin-bottom: 7px;
+        }
+
+        .demo-card p {
+            color: #6b7280;
+            font-size: 12px;
+            margin-bottom: 12px;
+        }
+
+        .demo-btn {
+            display: inline-block;
+            text-decoration: none;
+            padding: 8px 12px;
+            border-radius: 7px;
+            background: #f3e8ff;
+            color: #7c3aed;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        /* CATEGORY */
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+        }
+
+        .category {
+            padding: 16px;
+            border-radius: 11px;
+            text-align: center;
+            border: 1px solid #e5e7eb;
+        }
+
+        .category-icon {
+            font-size: 24px;
+            margin-bottom: 7px;
+        }
+
+        .category-name {
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .blue {
+            background: #eff6ff;
+            color: #2563eb;
+        }
+
+        .green {
+            background: #ecfdf5;
+            color: #059669;
+        }
+
+        .purple {
+            background: #f5f3ff;
+            color: #7c3aed;
+        }
+
+        .red {
+            background: #fef2f2;
+            color: #dc2626;
+        }
+
+        /* RECENT CALLS */
+
+        .call-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .call-card {
+            border: 1px solid #e5e7eb;
+            border-radius: 11px;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+        }
+
+        .call-left {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            min-width: 0;
+        }
+
+        .call-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+
+        .call-info {
+            min-width: 0;
+        }
+
+        .call-info h4 {
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+
+        .phone {
+            font-size: 12px;
+            color: #6b7280;
+        }
+
+        .call-right {
+            text-align: right;
+            flex-shrink: 0;
+        }
+
+        .time {
+            color: #6b7280;
+            font-size: 11px;
+            margin-bottom: 6px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 5px 8px;
+            border-radius: 20px;
+            font-size: 10px;
+            font-weight: 700;
+        }
+
+        .badge-official {
+            background: #f3e8ff;
+            color: #7c3aed;
+        }
+
+        .badge-business {
+            background: #ecfdf5;
+            color: #059669;
+        }
+
+        .badge-personal {
+            background: #eff6ff;
+            color: #2563eb;
+        }
+
+        .badge-spam {
+            background: #fef2f2;
+            color: #dc2626;
+        }
+
+        .badge-unknown {
+            background: #f3f4f6;
+            color: #6b7280;
+        }
+
+        .empty {
+            text-align: center;
+            padding: 30px;
+            color: #6b7280;
+            font-size: 13px;
+        }
+
+        .footer-note {
+            text-align: center;
+            color: #9ca3af;
+            font-size: 11px;
+            padding: 10px;
+        }
+
+        @media (max-width: 750px) {
+
+            .demo-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .category-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .call-card {
+                align-items: flex-start;
+            }
+
+            .topbar {
+                padding: 16px 18px;
+            }
+
+            .container {
+                padding: 0 14px;
+            }
+        }
+    </style>
+</head>
+
+
+<body>
+
+    <!-- TOP BAR -->
+
+    <div class="topbar">
+
+        <h1>Government Verified Caller ID</h1>
+
+        <span>Prototype Dashboard</span>
+
+    </div>
+
+
+    <div class="container">
+
+        <!-- HERO -->
+
+        <div class="hero">
+
+            <h2>Caller Verification Dashboard</h2>
+
+            <p>
+                Identify government, business, personal, spam and
+                unverified numbers before responding to a call.
+            </p>
+
+
+            <div class="buttons">
+
+                <a
+                    href="/manage-numbers"
+                    class="btn primary"
+                >
+                    🏛️ Manage Government Numbers
+                </a>
+
+                <a
+                    href="/incoming/8712662511"
+                    class="btn secondary"
+                >
+                    📞 Test Incoming Call
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- QUICK DEMO -->
+
+        <div class="section">
+
+            <div class="section-header">
+
+                <h3>Quick Demo</h3>
+
+                <span>Test different caller types</span>
+
+            </div>
+
+
+            <div class="demo-grid">
+
+                <!-- OFFICIAL -->
+
+                <div class="demo-card">
+
+                    <h4>🏛️ Government</h4>
+
+                    <p>
+                        Addagudur Police Station
+                    </p>
+
+                    <a
+                        href="/incoming/8712662511"
+                        class="demo-btn"
+                    >
+                        Simulate Call
+                    </a>
+
+                </div>
+
+
+                <!-- BUSINESS -->
+
+                <div class="demo-card">
+
+                    <h4>🏢 Business</h4>
+
+                    <p>
+                        ABC Business
+                    </p>
+
+                    <a
+                        href="/incoming/9876543211"
+                        class="demo-btn"
+                    >
+                        Simulate Call
+                    </a>
+
+                </div>
+
+
+                <!-- SPAM -->
+
+                <div class="demo-card">
+
+                    <h4>⚠️ Spam</h4>
+
+                    <p>
+                        Potential Spam
+                    </p>
+
+                    <a
+                        href="/incoming/9876543212"
+                        class="demo-btn"
+                    >
+                        Simulate Call
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- CATEGORIES -->
+
+        <div class="section">
+
+            <div class="section-header">
+
+                <h3>Caller Categories</h3>
+
+                <span>Colour-based identification</span>
+
+            </div>
+
+
+            <div class="category-grid">
+
+                <div class="category blue">
+
+                    <div class="category-icon">
+                        👤
+                    </div>
+
+                    <div class="category-name">
+                        Personal
+                    </div>
+
+                </div>
+
+
+                <div class="category green">
+
+                    <div class="category-icon">
+                        🏢
+                    </div>
+
+                    <div class="category-name">
+                        Business
+                    </div>
+
+                </div>
+
+
+                <div class="category purple">
+
+                    <div class="category-icon">
+                        🏛️
+                    </div>
+
+                    <div class="category-name">
+                        Official Department
+                    </div>
+
+                </div>
+
+
+                <div class="category red">
+
+                    <div class="category-icon">
+                        ⚠️
+                    </div>
+
+                    <div class="category-name">
+                        Spam
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- RECENT CALLS -->
+
+        <div class="section">
+
+            <div class="section-header">
+
+                <h3>Recent Calls</h3>
+
+                <span>Latest 5 calls</span>
+
+            </div>
+
+
+            <div class="call-list">
+
+                {% if recent_calls %}
+
+                    {% for call in recent_calls %}
+
+                        <div class="call-card">
+
+                            <div class="call-left">
+
+                                {% if call["category"] == "official_department" %}
+
+                                    <div class="call-icon purple">
+                                        🏛️
+                                    </div>
+
+                                {% elif call["category"] == "business" %}
+
+                                    <div class="call-icon green">
+                                        🏢
+                                    </div>
+
+                                {% elif call["category"] == "personal" %}
+
+                                    <div class="call-icon blue">
+                                        👤
+                                    </div>
+
+                                {% elif call["category"] == "spam" %}
+
+                                    <div class="call-icon red">
+                                        ⚠️
+                                    </div>
+
+                                {% else %}
+
+                                    <div class="call-icon">
+                                        ?
+                                    </div>
+
+                                {% endif %}
+
+
+                                <div class="call-info">
+
+                                    <h4>
+                                        {{ call["caller_name"] }}
+                                    </h4>
+
+                                    <div class="phone">
+                                        {{ call["phone_number"] }}
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="call-right">
+
+                                <div class="time">
+                                    {{ call["call_time"] }}
+                                </div>
+
+
+                                {% if call["category"] == "official_department" %}
+
+                                    <span class="badge badge-official">
+                                        OFFICIAL
+                                    </span>
+
+                                {% elif call["category"] == "business" %}
+
+                                    <span class="badge badge-business">
+                                        BUSINESS
+                                    </span>
+
+                                {% elif call["category"] == "personal" %}
+
+                                    <span class="badge badge-personal">
+                                        PERSONAL
+                                    </span>
+
+                                {% elif call["category"] == "spam" %}
+
+                                    <span class="badge badge-spam">
+                                        SPAM
+                                    </span>
+
+                                {% else %}
+
+                                    <span class="badge badge-unknown">
+                                        UNKNOWN
+                                    </span>
+
+                                {% endif %}
+
+                            </div>
+
+                        </div>
+
+                    {% endfor %}
+
+                {% else %}
+
+                    <div class="empty">
+
+                        No calls recorded yet.
+
+                    </div>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-note">
+
+            Government Verified Caller ID • Prototype
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>
